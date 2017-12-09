@@ -11,7 +11,7 @@ rawdata = json.load(open('test.json')) # 'u' in string
 data = json.dumps(rawdata) # the whole data become string
 
 #pprint(loaddata)
-pprint(rawdata)
+#pprint(rawdata)
 
 # Step 2: show data in GUI
 root = Tk()
@@ -20,15 +20,12 @@ root = Tk()
 #var.set('Test')
 #label.pack()
 
-#for x in obj:
-FBvar = StringVar()
-FBPixel = Label( root, textvariable=FBvar, relief=RAISED)
-
-
-#for x in rawdata["FB"]:
-FBList = 'FB1: %s' % rawdata["FB"][0]["id"]
-FBvar.set(FBList)
-FBPixel.pack()
+for x in rawdata["FB"]:
+    FBvar = StringVar()
+    FBPixel = Label( root, textvariable=FBvar, relief=RAISED)
+    FBList = 'FB: %s' % x['id']
+    FBvar.set(FBList)
+    FBPixel.pack()
 
 GAvar = StringVar()
 GAPixel = Label( root, textvariable=GAvar, relief=RAISED)
