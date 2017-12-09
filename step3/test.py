@@ -20,16 +20,19 @@ root = Tk()
 #var.set('Test')
 #label.pack()
 
-for x in rawdata["FB"]:
-    FBvar = StringVar()
-    FBPixel = Label( root, textvariable=FBvar, relief=RAISED)
-    FBList = 'FB: %s' % x['id']
-    FBvar.set(FBList)
-    FBPixel.pack()
+def listAllPixel(pName):
+    for x in range(len(rawdata[pName])):
+	    var = StringVar()
+	    label = Label( root, textvariable=var, relief=RAISED,fg="red",font=("Helvetica", 16),padx=10,bd=0)
+	    labelList = '%s%s: %s' % (pName,(x+1),rawdata[pName][x]['id'])
+	    var.set(labelList)
+	    label.pack()
 
-GAvar = StringVar()
-GAPixel = Label( root, textvariable=GAvar, relief=RAISED)
-GAvar.set('GA1: %s' % rawdata["GA"][0]["id"])
-GAPixel.pack()
+
+listAllPixel('FB')
+listAllPixel('GA')
+
+
+
 
 root.mainloop()
