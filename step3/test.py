@@ -15,10 +15,6 @@ data = json.dumps(rawdata) # the whole data become string
 
 # Step 2: show data in GUI
 root = Tk()
-#var = StringVar()
-#label = Label( root, textvariable=var, relief=RAISED, underline=3)
-#var.set('Test')
-#label.pack()
 
 def listAllPixel(pName):
     for x in range(len(rawdata[pName])):
@@ -28,11 +24,18 @@ def listAllPixel(pName):
 	    var.set(labelList)
 	    label.pack()
 
-
+#Load FB, GA
 listAllPixel('FB')
 listAllPixel('GA')
 
+#step3
+#create a button
 
+def submitBtn():
+    print "click!"
+
+b = Button(root, text="Submit", command=submitBtn)
+b.pack()
 
 
 root.mainloop()
