@@ -15,21 +15,19 @@ def listAllPixel(pName):
     data = json.dumps(rawdata) # the whole data become string
     # Step 2: show data in GUI
     for x in range(len(rawdata[pName])):
-        var = StringVar()
-        label = Label( root, textvariable=var, relief=RAISED,fg="red",font=("Helvetica", 16),padx=10, bd=0,width=5)
         labelList = '%s%s:' % (pName,(x+1))
-        var.set(labelList)
-        label.pack()
+        Label( root, text=labelList, relief=RAISED,fg="red",font=("Helvetica", 16),padx=10, bd=0,width=5).grid(row=x)
+        Label( root, text='ID', relief=RAISED,fg="red",font=("Helvetica", 16),padx=10, bd=0,width=5).grid(row=x,column=1)
 
         E[pName].append({'id':'','name':''})
         E[pName][x]['id'] = Entry(root, bd=5)
+        E[pName][x]['id'].grid(row=(x), column=2)
         E[pName][x]['id'].insert(0, '%s' % rawdata[pName][x]['id'])
-        E[pName][x]['id'].pack()
     
 
 #Load FB, GA
 listAllPixel('FB')
-listAllPixel('GA')
+#listAllPixel('GA')
 print E
 
 #step3
@@ -42,27 +40,27 @@ def submitBtn():
         
         for x in range(len(json_data['FB'])):
             json_data['FB'][x]['id'] = E['FB'][x]['id'].get() #change id here
-        for y in range(len(json_data['GA'])):
-            json_data['GA'][y]['id'] = E['GA'][y]['id'].get() #change id here
+        #for y in range(len(json_data['GA'])):
+        #    json_data['GA'][y]['id'] = E['GA'][y]['id'].get() #change id here
 
     with open('test.json', 'w') as f:
         f.write(json.dumps(json_data))
         f.close()
 
-    label = Label(root,text='Updated!')
-    label.pack()
+    Label(root,text='Updated!').grid(row=5,column=0)
     
-    b.pack_forget(); #remvoe from the view
+    b.grid_forget(); #remvoe from the view
+    c.grid(row=5)
     
 
     print "Updated!"
     print json.dumps(json_data)
 
 b = Button(root, text="Submit", command=submitBtn)
-b.pack()
+b.grid(row=7)
 
 c = Button(root, text="Cancel", command=root.destroy)
-c.pack()
+c.grid(row=7,column=1)
 
 
 root.mainloop()
